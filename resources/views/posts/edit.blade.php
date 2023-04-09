@@ -5,15 +5,16 @@
 @endsection
 
 @section('content')
-    <form action="{{ route('posts.store') }}" method="POST">
+    <form method="POST" action="{{ route('posts.update', ['id' => $post['id']]) }}">
         @csrf
+        @method('PUT')
         <div class="mb-3">
-            <label class="form-label" >Title</label>
-            <input type="text" name="title" class="form-control">
+            <label class="form-label">Title</label>
+            <input type="text" name="title" class="form-control" value="{{ $post['title'] }}">
         </div>
         <div class="mb-3">
             <label class="form-label">Description</label>
-            <textarea class="form-control" name="description" rows="3"></textarea>
+            <textarea class="form-control" name="description" rows="3">{{ $post['description'] }}</textarea>
         </div>
 
         <div class="mb-3">
@@ -26,7 +27,6 @@
 
             </select>
         </div>
-
-        <button class="btn btn-success">Submit</button>
+        <button class="btn btn-success">update</button>
     </form>
 @endsection
