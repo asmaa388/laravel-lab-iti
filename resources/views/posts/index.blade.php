@@ -15,6 +15,7 @@
                 <th scope="col">Title</th>
                 <th scope="col">Posted By</th>
                 <th scope="col">Created At</th>
+                <th scope="col">Slug</th>
                 <th scope="col">View</th>
                 <th scope="col">Update</th>
                 <th scope="col">Delete</th>
@@ -35,6 +36,7 @@
                     <td>
                     {{ \Carbon\Carbon::parse($post->created_at)->isoFormat('MMMM Do YYYY') }}
                     </td>
+                    <td>{{ $post->slug }}</td>
                         <td><a href="{{route('posts.show', ['id' => $post['id']]) }}"><button class="btn btn-info">View</button></a></td>
                         <td><a href="{{route('posts.edit', ['id' => $post['id']]) }}"><button class="btn btn-primary">Update</button></a></td>
                         <td>

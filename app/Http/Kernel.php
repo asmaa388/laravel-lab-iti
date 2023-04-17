@@ -43,6 +43,7 @@ class Kernel extends HttpKernel
             \Illuminate\Routing\Middleware\ThrottleRequests::class.':api',
             \Illuminate\Routing\Middleware\SubstituteBindings::class,
         ],
+        'auth.post'=>['auth'],
     ];
 
     /**
@@ -64,4 +65,10 @@ class Kernel extends HttpKernel
         'throttle' => \Illuminate\Routing\Middleware\ThrottleRequests::class,
         'verified' => \Illuminate\Auth\Middleware\EnsureEmailIsVerified::class,
     ];
+    protected $routeMiddleware = [
+        // ...
+
+        // Add a new route middleware for the 'auth.post' group
+        'auth.post' => \Illuminate\Routing\Middleware\SubstituteBindings::class,
+    ];    
 }

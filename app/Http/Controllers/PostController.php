@@ -2,6 +2,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use  App\Http\Requests\StorePostRequest;
 use  App\Models\Post;
 use  App\Models\User;
 use  App\Models\Comment;
@@ -44,17 +45,25 @@ class PostController extends Controller
         //$data=request()->all();
         //to catch specific field data from form
         //$title=request()->title;
-    public function store(Request $request)
+    public function store(StorePostRequest $request)
     {
+        // $request->validate([
+        //     'title' =>['required', 'min:10'],
+        //     'description' => ['required', 'min:5'],
+        // ],[
+        //     'title.required'=>'my custom message',
+        //     'title.min'=>'my custom message for min rule',
+        // ]);
           
         $data= $request->all();
-        Post::create([
+        $item=Post::create([
             'title'=>$data['title'],
             'description'=>$data['description'],
             'user_id'=>$data['post_creater'],
+            
         ]);
+        $slug = $item->slug;
         return redirect()->route('posts.index');
-
         
         //insert into posts using model class--->insert posts table
 
@@ -72,7 +81,7 @@ class PostController extends Controller
     }
 
     //Update
-    public function update(Request $request, $id)
+    public function update(StorePostRequest $request, $id)
     {
         $post= Post::find($id);
         $post->title = $request->post('title');
